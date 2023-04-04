@@ -1,4 +1,6 @@
 class PlacesController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: [:create, :update, :destroy]
+
   def index
     @places = Place.all
     render json: @places
@@ -36,6 +38,6 @@ class PlacesController < ApplicationController
   private
 
   def place_params
-    params.require(:place).permit(:name, :type, :description, :location, :neighborhood, :comments)
+    params.require(:place).permit(:name, :place_type, :description, :location, :neighborhood)
   end
 end
