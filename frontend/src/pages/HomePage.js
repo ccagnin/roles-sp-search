@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import LoginForm from '../components/LoginForm';
+import Navbar from '../components/NavBar'
 
 function HomePage() {
   const [places, setPlaces] = useState([]);
@@ -13,6 +14,7 @@ function HomePage() {
 
   return (
     <div>
+      <Navbar />
       <LoginForm />
       <h1>Lista de lugares</h1>
       <ul>
