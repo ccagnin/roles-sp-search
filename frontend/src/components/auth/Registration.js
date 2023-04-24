@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 class Registration extends React.Component {
   constructor (props) {
@@ -35,7 +36,8 @@ class Registration extends React.Component {
     )
     .then (response => {
       if (response.data.status === 'created') {
-        this.props.handleSuccessfulAuth (response.data);
+        this.props.handleSuccessfulAuth(response.data);
+        this.props.navigate('/places');
       }
     })
     .catch (error => {
@@ -101,4 +103,9 @@ class Registration extends React.Component {
   }
 }
 
-export default Registration;
+const RegistrationWithNavigation = (props) => {
+  const navigate = useNavigate();
+  return <Registration {...props} navigate={navigate} />;
+}
+
+export default RegistrationWithNavigation;
