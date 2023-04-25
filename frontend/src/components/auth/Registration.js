@@ -14,8 +14,8 @@ class Registration extends React.Component {
       registrationErrors: '',
     };
 
-    this.handleSubmit = this.handleSubmit.bind (this);
-    this.handleChange = this.handleChange.bind (this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleSubmit (event) {
