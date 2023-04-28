@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 
 class NewPlaceForm extends React.Component {
   constructor(props) {
@@ -26,7 +28,7 @@ class NewPlaceForm extends React.Component {
 
   handleSubmit(event) {
     const {name, place_type, description, location, neighborhood, comments, user_id} = this.state;
-    const { handleNewPlace } = this.props;
+    const { handleNewPlace, navigate } = this.props;
 
     axios.post (
       'http://localhost:4000/places/',
@@ -46,6 +48,7 @@ class NewPlaceForm extends React.Component {
     .then (response => {
       if (response.data.status === 'created') {
         handleNewPlace(response.data.place);
+        navigate('/my-places');
         console.log('Novo local adicionado:', response.data.place);
       }
     })
@@ -125,4 +128,9 @@ class NewPlaceForm extends React.Component {
   }
 }
 
-export default NewPlaceForm;
+const NewPlaceFormNav = (props) => {
+  const navigate = useNavigate();
+  return <NewPlaceForm {...props} navigate={navigate} />
+}
+
+export default NewPlaceFormNav;

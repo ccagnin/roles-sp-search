@@ -36,6 +36,11 @@ class PlacesController < ApplicationController
     head :no_content
   end
 
+  def user_places
+    @places = @current_user.places
+    render json: @places
+  end
+
   private
 
   def place_params
