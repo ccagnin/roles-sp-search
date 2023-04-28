@@ -29,7 +29,7 @@ class NewPlaceForm extends React.Component {
     const { handleNewPlace } = this.props;
 
     axios.post (
-      'http://localhost:4000/places/new',
+      'http://localhost:4000/places/',
       {
         place: {
           name: name,
@@ -46,6 +46,7 @@ class NewPlaceForm extends React.Component {
     .then (response => {
       if (response.data.status === 'created') {
         handleNewPlace(response.data.place);
+        console.log('Novo local adicionado:', response.data.place);
       }
     })
     .catch (error => {

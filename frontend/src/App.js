@@ -16,6 +16,8 @@ export default class App extends Component {
 
     this.handleLogin = this.handleLogin.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
+    this.handleNewPlace = this.handleNewPlace.bind(this);
+
 
   }
 
@@ -64,6 +66,12 @@ export default class App extends Component {
     })
   }
 
+  handleNewPlace(data) {
+    this.setState({
+      places: data.places
+    })
+  }
+
   render() {
     return (
       <div>
@@ -83,7 +91,7 @@ export default class App extends Component {
               <Route
                 exact
                 path='/places/new'
-                element={<NewPlaceForm loggedInStatus={this.state.loggedInStatus} />}
+                element={<NewPlaceForm handleNewPlace={this.handleNewPlace} user_id={this.state.user.id} loggedInStatus={this.state.loggedInStatus} />}
               />
             </Routes>
         </BrowserRouter>

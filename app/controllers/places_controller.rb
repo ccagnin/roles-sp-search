@@ -1,5 +1,6 @@
 class PlacesController < ApplicationController
   # skip_before_action :verify_authenticity_token, only: [:create, :update, :destroy]
+  include CurrentUserConcern
 
   def index
     @places = Place.all
@@ -12,11 +13,11 @@ class PlacesController < ApplicationController
   end
 
   def create
-    @place = Place.new(place_params)
+    @place = @current_user.places.build(place_params)
     if @place.save
-      render json: @place, status: :created
+      render json: { status: 'created', place: @place }
     else
-      render json: @place.errors, status: :unprocessable_entity
+      render json: @places.errors, status: :unprocessable_entity
     end
   end
 
