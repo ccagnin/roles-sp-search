@@ -3,6 +3,7 @@ import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import axios from 'axios';
 import Home from './components/Home'
 import Places from './components/Places'
+import Navbar from './components/layouts/NavBar'
 
 export default class App extends Component {
   constructor(props) {
@@ -42,10 +43,17 @@ export default class App extends Component {
   }
 
   handleLogout() {
-    this.setState({
-      loggedInStatus: 'NOT_LOGGED_IN',
-      user: {}
-    })
+    axios.delete('http://localhost:4000/logout', { withCredentials: true })
+      .then(response => {
+        this.setState({
+          loggedInStatus: 'NOT_LOGGED_IN',
+          user: {}
+        })
+        this.checkLoginStatus();
+      })
+      .catch(error => {
+        console.log('logout error', error);
+      })
   }
 
   handleLogin(data) {
@@ -59,18 +67,19 @@ export default class App extends Component {
     return (
       <div>
         <BrowserRouter>
-          <Routes>
-            <Route
-              exact
-              path='/'
-              element={<Home handleLogin={this.handleLogin} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />}
-            />
-            <Route
-              exact
-              path='/places'
-              element={<Places loggedInStatus={this.state.loggedInStatus} />}
-            />
-          </Routes>
+          <Navbar loggedInStatus={this.state.loggedInStatus} handleLogout={this.handleLogout} />
+            <Routes>
+              <Route
+                exact
+                path='/'
+                element={<Home handleLogin={this.handleLogin} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />}
+              />
+              <Route
+                exact
+                path='/places'
+                element={<Places handleLogin={this.handleLogin} loggedInStatus={this.state.loggedInStatus} />}
+              />
+            </Routes>
         </BrowserRouter>
       </div>
     );

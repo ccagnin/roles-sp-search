@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Login from './auth/Login';
 
 class Places extends Component {
   constructor(props) {
@@ -7,6 +8,15 @@ class Places extends Component {
     this.state = {
       places: []
     }
+
+    this.handleSuccessfulAuth = this.handleSuccessfulAuth.bind(this);
+
+  }
+
+  handleSuccessfulAuth(data) {
+    this.props.handleLogin(data);
+    this.getPlaces();
+    // this.props.history.push("/places");
   }
 
   componentDidMount() {
@@ -39,12 +49,15 @@ class Places extends Component {
           <div>
             <h1>Places found:</h1>
             <ul>
-              {this.state.places?.map(place => <li key={place.id}>{place.name}</li>)}
+              {this.state.places?.map(place =>
+                <li key={place.id}>{place.name} | {place.description} </li>
+              )}
             </ul>
           </div>
         ) : (
             <div>
               <h1>You need to log in!</h1>
+              <Login handleSuccessfulAuth={this.handleSuccessfulAuth} />
             </div>
           )}
       </div>
