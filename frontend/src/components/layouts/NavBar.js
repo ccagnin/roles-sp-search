@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 class NavBar extends Component {
   constructor(props) {
@@ -10,7 +10,6 @@ class NavBar extends Component {
     }
 
     this.handleLogout = this.handleLogout.bind(this);
-    // this.logoutAndRedirect = this.logoutAndRedirect.bind(this);
   }
 
   componentDidMount() {
@@ -46,18 +45,21 @@ class NavBar extends Component {
     handleLogout();
   }
 
-  // logoutAndRedirect() {
-  //   this.handleLogout();
-  //   this.props.navigate('/');
-  // }
-
   render() {
     return (
       <div>
         {this.state.loggedInStatus === 'LOGGED_IN' ? (
-          <Link to="/" onClick={this.handleLogout}>Logout</Link>
+          <>
+            <NavLink to="/places/new">Adicionar novo role</NavLink>
+            <NavLink to="#">Meus favoritos</NavLink>
+            <NavLink to="/" onClick={this.handleLogout}>Logout</NavLink>
+          </>
+
         ) : (
-          <a href="http://localhost:4000/login">Login</a>
+          <>
+            <NavLink to="/login">Login</NavLink>
+            <NavLink to="/registrer">Cadastre-se</NavLink>
+          </>
         )}
       </div>
     )

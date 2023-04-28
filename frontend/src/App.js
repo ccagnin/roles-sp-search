@@ -4,6 +4,7 @@ import axios from 'axios';
 import Home from './components/Home'
 import Places from './components/Places'
 import Navbar from './components/layouts/NavBar'
+import NewPlaceForm from './components/NewPlaceForm'
 
 export default class App extends Component {
   constructor(props) {
@@ -78,6 +79,11 @@ export default class App extends Component {
                 exact
                 path='/places'
                 element={<Places handleLogin={this.handleLogin} loggedInStatus={this.state.loggedInStatus} />}
+              />
+              <Route
+                exact
+                path='/places/new'
+                element={<NewPlaceForm loggedInStatus={this.state.loggedInStatus} />}
               />
             </Routes>
         </BrowserRouter>
