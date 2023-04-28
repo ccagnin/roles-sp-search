@@ -11,7 +11,7 @@ class NewPlaceForm extends React.Component {
       location: '',
       neighborhood: '',
       comments: '',
-      user_id: ''
+      user_id: props.user_id
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
