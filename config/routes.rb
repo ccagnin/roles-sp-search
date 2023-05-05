@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root 'places#index'
-  resources :places, only: [:index, :show, :create]
+  resources :places, only: [:index, :show, :create, :update, :destroy]
   resources :sessions, only: [:create]
   resources :registrations, only: [:create]
   delete :logout, to: "sessions#logout"

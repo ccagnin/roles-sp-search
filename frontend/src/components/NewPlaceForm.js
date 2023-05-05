@@ -119,7 +119,6 @@ class NewPlaceForm extends React.Component {
             placeholder='Comments'
             value={comments}
             onChange={this.handleChange}
-            required
           />
           <button type='submit'>Add Place</button>
         </form>
