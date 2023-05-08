@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Login from './auth/Login';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class Places extends Component {
   constructor(props) {
@@ -42,6 +44,34 @@ class Places extends Component {
       .catch(error => console.log(error))
   }
 
+  handleFavoriteClick(placeId) {
+    axios.post(`http://localhost:4000/places/${placeId}/favorite`, {}, { withCredentials: true })
+      .then(response => {
+        if (response.data.favorited) {
+          const updatedPlaces = this.state.places.map(place => {
+            if (place.id === placeId) {
+              return { ...place, favorited: true };
+            } else {
+              return place;
+            }
+          });
+          this.setState({ places: updatedPlaces });
+        } else {
+          const updatedPlaces = this.state.places.map(place => {
+            if (place.id === placeId) {
+              return { ...place, favorited: false };
+            } else {
+              return place;
+            }
+          });
+          this.setState({ places: updatedPlaces });
+        }
+      })
+      .catch(error => console.log(error));
+  }
+
+
+
   render() {
     return (
       <div>
@@ -50,7 +80,13 @@ class Places extends Component {
             <h1>Places found:</h1>
             <ul>
               {this.state.places?.map(place =>
-                <li key={place.id}>{place.name} | {place.description} </li>
+                <li key={place.id}>{place.name} | {place.description} |
+                <FontAwesomeIcon
+                    icon={faHeart}
+                    className={`heart-icon ${place.favorited ? 'favorited' : ''}`}
+                    onClick={() => this.handleFavoriteClick(place.id)}
+                  />
+                </li>
               )}
             </ul>
           </div>

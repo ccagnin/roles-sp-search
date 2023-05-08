@@ -6,4 +6,7 @@ Rails.application.routes.draw do
   delete :logout, to: "sessions#logout"
   get :logged_in, to: "sessions#logged_in"
   get '/my-places', to: 'places#user_places'
+  resources :places do
+    post 'favorite', to: 'places#favorite'
+  end
 end
