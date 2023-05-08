@@ -50,6 +50,7 @@ class NavBar extends Component {
       <div>
         {this.state.loggedInStatus === 'LOGGED_IN' ? (
           <>
+            <NavLink to="/places">Lista Completa</NavLink>
             <NavLink to="/places/new">Adicionar novo role</NavLink>
             <NavLink to="my-places">Meus roles</NavLink>
             <NavLink to="#">Meus favoritos</NavLink>

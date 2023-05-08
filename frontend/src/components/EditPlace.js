@@ -1,20 +1,20 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import PlaceForm from './layouts/PlaceForm';
+import { useNavigate } from 'react-router-dom';
 
-
-function NewPlaceForm() {
+function EditPlace() {
   const navigate = useNavigate();
 
   function handleSave() {
     navigate('/my-places');
   }
 
+
   return (
     <div>
-      <PlaceForm onSave={handleSave} />
+      <PlaceForm editMode={true} onSave={handleSave} />
     </div>
   );
 }
 
-export default NewPlaceForm;
+export default EditPlace;

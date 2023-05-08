@@ -6,6 +6,7 @@ import Places from './components/Places'
 import Navbar from './components/layouts/NavBar'
 import NewPlaceForm from './components/NewPlaceForm'
 import UserPlaces from './components/UserPlaces'
+import EditPlace from './components/EditPlace'
 
 export default class App extends Component {
   constructor(props) {
@@ -98,6 +99,11 @@ export default class App extends Component {
                 exact
                 path='/my-places'
                 element={<UserPlaces loggedInStatus={this.state.loggedInStatus} user_id={this.state.user.id} />}
+              />
+              <Route
+                exact
+                path='/places/:id/edit'
+                element={<EditPlace loggedInStatus={this.state.loggedInStatus} user_id={this.state.user.id} />}
               />
             </Routes>
         </BrowserRouter>
