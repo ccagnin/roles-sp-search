@@ -52,7 +52,7 @@ class PlacesController < ApplicationController
   end
 
   def unfavorite
-    @place = Place.find_by(id: params[:id])
+    @place = Place.find_by(id: params[:place_id])
     if @place
       @place.favorited_by.delete(@current_user.id)
       @place.save
