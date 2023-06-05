@@ -1,5 +1,6 @@
 class PlacesController < ApplicationController
-  skip_before_action :verify_authenticity_token, only: [:create, :update, :destroy]
+  # skip_before_action :verify_authenticity_token, only: [:create, :update, :destroy]
+  include CurrentUserConcern
 
   def index
     @places = Place.all
@@ -12,11 +13,11 @@ class PlacesController < ApplicationController
   end
 
   def create
-    @place = Place.new(place_params)
+    @place = @current_user.places.build(place_params)
     if @place.save
-      render json: @place, status: :created
+      render json: { status: 'created', place: @place }
     else
-      render json: @place.errors, status: :unprocessable_entity
+      render json: @places.errors, status: :unprocessable_entity
     end
   end
 
@@ -33,6 +34,32 @@ class PlacesController < ApplicationController
     @place = Place.find(params[:id])
     @place.destroy
     head :no_content
+  end
+
+  def user_places
+    @places = @current_user.places
+    render json: @places
+  end
+
+  def favorite
+    @place = Place.find(params[:place_id])
+    if @place.favorited_by?(@current_user)
+      @current_user.favorites.find_by(place_id: @place.id).destroy
+    else
+      @current_user.favorites.create(place_id: @place.id)
+    end
+    redirect_to @place
+  end
+
+  def unfavorite
+    @place = Place.find_by(id: params[:place_id])
+    if @place
+      @place.favorited_by.delete(@current_user.id)
+      @place.save
+      render json: { favorited: false }
+    else
+      render json: @place.errors, status: :unprocessable_entity
+    end
   end
 
   private

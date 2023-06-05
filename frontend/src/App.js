@@ -3,6 +3,11 @@ import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import axios from 'axios';
 import Home from './components/Home'
 import Places from './components/Places'
+import Navbar from './components/layouts/NavBar'
+import NewPlaceForm from './components/NewPlaceForm'
+import UserPlaces from './components/UserPlaces'
+import EditPlace from './components/EditPlace'
+import UserFavorites from './components/UserFavorites'
 
 export default class App extends Component {
   constructor(props) {
@@ -14,6 +19,8 @@ export default class App extends Component {
 
     this.handleLogin = this.handleLogin.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
+    this.handleNewPlace = this.handleNewPlace.bind(this);
+
 
   }
 
@@ -42,10 +49,17 @@ export default class App extends Component {
   }
 
   handleLogout() {
-    this.setState({
-      loggedInStatus: 'NOT_LOGGED_IN',
-      user: {}
-    })
+    axios.delete('http://localhost:4000/logout', { withCredentials: true })
+      .then(response => {
+        this.setState({
+          loggedInStatus: 'NOT_LOGGED_IN',
+          user: {}
+        })
+        this.checkLoginStatus();
+      })
+      .catch(error => {
+        console.log('logout error', error);
+      })
   }
 
   handleLogin(data) {
@@ -55,26 +69,51 @@ export default class App extends Component {
     })
   }
 
+  handleNewPlace(data) {
+    this.setState({
+      places: data.places
+    })
+  }
+
   render() {
     return (
       <div>
         <BrowserRouter>
-          <Routes>
-            <Route
-              exact
-              path='/'
-              element={<Home handleLogin={this.handleLogin} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />}
-            />
-            <Route
-              exact
-              path='/places'
-              element={<Places loggedInStatus={this.state.loggedInStatus} />}
-            />
-          </Routes>
+          <Navbar loggedInStatus={this.state.loggedInStatus} handleLogout={this.handleLogout} />
+            <Routes>
+              <Route
+                exact
+                path='/'
+                element={<Home handleLogin={this.handleLogin} handleLogout={this.handleLogout} loggedInStatus={this.state.loggedInStatus} />}
+              />
+              <Route
+                exact
+                path='/places'
+                element={<Places handleLogin={this.handleLogin} loggedInStatus={this.state.loggedInStatus} />}
+              />
+              <Route
+                exact
+                path='/places/new'
+                element={<NewPlaceForm handleNewPlace={this.handleNewPlace} user_id={this.state.user.id} loggedInStatus={this.state.loggedInStatus} />}
+              />
+              <Route
+                exact
+                path='/my-places'
+                element={<UserPlaces loggedInStatus={this.state.loggedInStatus} user_id={this.state.user.id} />}
+              />
+              <Route
+                exact
+                path='/places/:id/edit'
+                element={<EditPlace loggedInStatus={this.state.loggedInStatus} user_id={this.state.user.id} />}
+              />
+              <Route
+                exact
+                path='/users/favorites'
+                element={<UserFavorites loggedInStatus={this.state.loggedInStatus} user_id={this.state.user.id} />}
+              />
+            </Routes>
         </BrowserRouter>
       </div>
     );
   }
 }
-
-
