@@ -20,11 +20,15 @@ O projeto ainda está em desenvolvimento ativo. Embora a parte da API esteja con
 
 - **Adicionar Roles**: Os usuários têm a possibilidade de adicionar novos estabelecimentos na plataforma. Por meio de formulário, é possível cadastrar informações como nome, região, bairro, categoria e comentários.
 
-- **Autenticação de Usuários**: O projeto conta com um sistema de autenticação seguro, desenvolvido do zero, que permite aos usuários criar contas individuais. Após o registro, os usuários podem fazer login utilizando seu e-mail e senha, obtendo acesso a recursos adicionais, como a possibilidade de adicionar e editar roles.
+- **Autenticação de Usuários**: O projeto conta com um sistema de autenticação seguro, desenvolvido do zero, que permite aos usuários criar contas individuais. Após o registro, os usuários podem fazer login utilizando seu e-mail e senha, obtendo acesso a recursos adicionais, como a possibilidade de adicionar, editar e favoritar seus roles preferidos.
 
 ## Próximas Etapas
 
 - **Implementar o Front-end em React**: A próxima meta é desenvolver uma interface de usuário atraente e interativa utilizando a biblioteca React. Isso permitirá que os usuários acessem e utilizem as funcionalidades da API, além de proporcionar uma experiência agradável durante a busca e adição de roles em São Paulo.
+
+-**Refatorar o código**: Refatorar o código aplicando conceitos de clean code para melhorar a leitura e o entendimento do mesmo.
+
+-**Criação de testes**
 
 - **Realizar o Deploy**: Implantar a aplicação em um ambiente de produção para torná-la acessível a um público mais amplo. O deploy permitirá disponibilizar a API e o front-end de forma online, permitindo que os usuários acessem e utilizem o projeto em tempo real.
 
