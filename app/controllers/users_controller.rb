@@ -2,9 +2,9 @@ class UsersController < ApplicationController
   include CurrentUserConcern
 
   def favorites
-    puts "@current_user: #{@current_user.inspect}" # adicione essa linha
+    puts "@current_user: #{@current_user.inspect}"
     @favorites = @current_user.favorites.map(&:place)
-    puts "@favorites: #{@favorites.inspect}" # adicione essa linha
+    puts "@favorites: #{@favorites.inspect}" 
     render json: @favorites
   end
 end
