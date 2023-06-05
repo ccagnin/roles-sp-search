@@ -26,9 +26,9 @@ O projeto ainda está em desenvolvimento ativo. Embora a parte da API esteja con
 
 - **Implementar o Front-end em React**: A próxima meta é desenvolver uma interface de usuário atraente e interativa utilizando a biblioteca React. Isso permitirá que os usuários acessem e utilizem as funcionalidades da API, além de proporcionar uma experiência agradável durante a busca e adição de roles em São Paulo.
 
--**Refatorar o código**: Refatorar o código aplicando conceitos de clean code para melhorar a leitura e o entendimento do mesmo.
+- **Refatorar o código**: Refatorar o código aplicando conceitos de clean code para melhorar a leitura e o entendimento do mesmo.
 
--**Criação de testes**
+- **Criação de testes**
 
 - **Realizar o Deploy**: Implantar a aplicação em um ambiente de produção para torná-la acessível a um público mais amplo. O deploy permitirá disponibilizar a API e o front-end de forma online, permitindo que os usuários acessem e utilizem o projeto em tempo real.
 
